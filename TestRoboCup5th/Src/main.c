@@ -29,7 +29,9 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "stdio.h"
 
+int16_t EncoderCounter = 0;
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -102,6 +104,8 @@ int main(void)
   MX_TIM12_Init();
   MX_USART1_UART_Init();
   MX_FATFS_Init();
+  MX_TIM1_Init();
+  MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
@@ -110,6 +114,24 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+		printf("Pulse     Speed");
+		for(int i=100; i<=10000; i+=100)
+		{
+				__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_1,i);
+				HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_RESET);
+				HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_SET);
+				HAL_Delay(3000);
+				if(i < 1000)
+					printf("%d       %f", i, (float)((float)EncoderCounter * 0.010466));
+				else if(i < 10000)
+					printf("%d      %f", i, (float)((float)EncoderCounter * 0.010466));
+				else
+					printf("%d     %f", i, (float)((float)EncoderCounter * 0.010466));
+				HAL_Delay(2000);
+		}
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_1, GPIO_PIN_RESET);
+		break;
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -160,6 +182,39 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
+
+/* Retargeting printf() output to Usart3 */
+#ifdef __GNUC__
+#define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
+#else
+#define PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)
+#endif 
+
+int fputc(int ch,FILE *f)
+{
+    uint8_t temp[1]={ch};
+    HAL_UART_Transmit(&huart1,temp,1,10);        //UartHandleÊÇ´®¿ÚµÄ¾ä±ú
+		return ch;
+}
+
+
+PUTCHAR_PROTOTYPE
+{
+	HAL_UART_Transmit(&huart1,(uint8_t*)&ch,1,10);
+	return ch;
+}
+
+
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+	
+	if(htim->Instance == TIM2)
+	{
+		EncoderCounter = htim1.Instance->CNT;
+		htim1.Instance->CNT  = 0;
+		//__HAL_TIM_SET_COMPARE(&htim1,TIM_CHANNEL_1,0);
+	}
+}
 
 /* USER CODE END 4 */
 
