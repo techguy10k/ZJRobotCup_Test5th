@@ -118,8 +118,8 @@ int main(void)
 		for(int i=100; i<=10000; i+=100)
 		{
 				__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_1,i);
-				HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_RESET);
-				HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_SET);
+				HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_RESET);
+				HAL_GPIO_WritePin(GPIOB, GPIO_PIN_1, GPIO_PIN_SET);
 				HAL_Delay(3000);
 				if(i < 1000)
 					printf("%d       %f", i, (float)((float)EncoderCounter * 0.010466));
