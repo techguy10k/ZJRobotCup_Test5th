@@ -381,7 +381,7 @@
       </TargetOption>
       <Groups>
         <Group>
-          <GroupName>Application/MDK-ARM</GroupName>
+          <GroupName>MDK-ARM</GroupName>
           <Files>
             <File>
               <FileName>startup_stm32f407xx.s</FileName>
@@ -391,7 +391,7 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Application/User</GroupName>
+          <GroupName>User</GroupName>
           <Files>
             <File>
               <FileName>main.c</FileName>
@@ -451,7 +451,7 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Drivers/STM32F4xx_HAL_Driver</GroupName>
+          <GroupName>STM32F4xx_HAL_Driver</GroupName>
           <Files>
             <File>
               <FileName>stm32f4xx_hal_i2c.c</FileName>
@@ -556,7 +556,7 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Drivers/CMSIS</GroupName>
+          <GroupName>CMSIS</GroupName>
           <Files>
             <File>
               <FileName>system_stm32f4xx.c</FileName>
