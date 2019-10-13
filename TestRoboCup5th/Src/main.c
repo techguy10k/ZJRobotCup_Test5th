@@ -31,7 +31,10 @@
 /* USER CODE BEGIN Includes */
 #include "stdio.h"
 
-int16_t EncoderCounter = 0;
+int16_t EncoderCounter1 = 0;
+int16_t EncoderCounter2 = 0;
+int16_t EncoderCounter3 = 0;
+int16_t EncoderCounter4 = 0;
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -99,13 +102,12 @@ int main(void)
   MX_I2C1_Init();
   MX_SDIO_SD_Init();
   MX_TIM9_Init();
-  MX_TIM10_Init();
-  MX_TIM11_Init();
   MX_TIM12_Init();
   MX_USART1_UART_Init();
   MX_FATFS_Init();
   MX_TIM1_Init();
   MX_TIM3_Init();
+  MX_TIM13_Init();
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
@@ -117,20 +119,49 @@ int main(void)
 		printf("Pulse     Speed");
 		for(int i=100; i<=10000; i+=100)
 		{
-				__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_1,i);
+				__HAL_TIM_SET_COMPARE(&htim2,TIM_CHANNEL_1,i);
+			
+				HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_RESET);
+				HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
+				HAL_GPIO_WritePin(GPIOC, GPIO_PIN_4, GPIO_PIN_RESET);
+				HAL_GPIO_WritePin(GPIOC, GPIO_PIN_5, GPIO_PIN_SET);
 				HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_RESET);
 				HAL_GPIO_WritePin(GPIOB, GPIO_PIN_1, GPIO_PIN_SET);
+				HAL_GPIO_WritePin(GPIOB, GPIO_PIN_2, GPIO_PIN_RESET);
+				HAL_GPIO_WritePin(GPIOF, GPIO_PIN_11, GPIO_PIN_SET);
 				HAL_Delay(3000);
 				if(i < 1000)
-					printf("%d       %f", i, (float)((float)EncoderCounter * 0.010466));
+				{
+					printf("1:%d       %f", i, (float)((float)EncoderCounter1 * 0.010466));
+					printf("2:%d       %f", i, (float)((float)EncoderCounter2 * 0.010466));
+					printf("3:%d       %f", i, (float)((float)EncoderCounter3 * 0.010466));
+					printf("4:%d       %f\n", i, (float)((float)EncoderCounter4 * 0.010466));
+				}
 				else if(i < 10000)
-					printf("%d      %f", i, (float)((float)EncoderCounter * 0.010466));
+				{
+					printf("1:%d      %f", i, (float)((float)EncoderCounter1 * 0.010466));
+					printf("2:%d      %f", i, (float)((float)EncoderCounter2 * 0.010466));
+					printf("3:%d      %f", i, (float)((float)EncoderCounter3 * 0.010466));
+					printf("4:%d      %f\n", i, (float)((float)EncoderCounter4 * 0.010466));
+				}
 				else
-					printf("%d     %f", i, (float)((float)EncoderCounter * 0.010466));
+				{
+					printf("1:%d     %f", i, (float)((float)EncoderCounter1 * 0.010466));
+					printf("2:%d     %f", i, (float)((float)EncoderCounter2 * 0.010466));
+					printf("3:%d     %f", i, (float)((float)EncoderCounter3 * 0.010466));
+					printf("4:%d     %f\n", i, (float)((float)EncoderCounter4 * 0.010466));
+
+				}
 				HAL_Delay(2000);
 		}
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(GPIOC, GPIO_PIN_4, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(GPIOC, GPIO_PIN_5, GPIO_PIN_SET);
 		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_RESET);
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_1, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_1, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_2, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(GPIOF, GPIO_PIN_11, GPIO_PIN_SET);
 		break;
     /* USER CODE END WHILE */
 
@@ -208,10 +239,16 @@ PUTCHAR_PROTOTYPE
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
 	
-	if(htim->Instance == TIM2)
+	if(htim->Instance == TIM13)
 	{
-		EncoderCounter = htim1.Instance->CNT;
+		EncoderCounter1 = htim1.Instance->CNT;
 		htim1.Instance->CNT  = 0;
+		EncoderCounter2 = htim3.Instance->CNT;
+		htim3.Instance->CNT  = 0;
+		EncoderCounter3 = htim9.Instance->CNT;
+		htim9.Instance->CNT  = 0;
+		EncoderCounter4 = htim12.Instance->CNT;
+		htim12.Instance->CNT = 0;
 		//__HAL_TIM_SET_COMPARE(&htim1,TIM_CHANNEL_1,0);
 	}
 }
