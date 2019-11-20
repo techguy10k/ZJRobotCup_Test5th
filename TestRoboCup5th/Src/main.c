@@ -20,7 +20,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "fatfs.h"
+#include "adc.h"
 #include "i2c.h"
 #include "sdio.h"
 #include "tim.h"
@@ -29,12 +29,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "stdio.h"
-
-int16_t EncoderCounter1 = 0;
-int16_t EncoderCounter2 = 0;
-int16_t EncoderCounter3 = 0;
-int16_t EncoderCounter4 = 0;
+#include "EncoderInit.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -76,7 +71,7 @@ void SystemClock_Config(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-
+	SCB->VTOR = (FLASH_BASE | 0x10000);
   /* USER CODE END 1 */
   
 
@@ -101,71 +96,27 @@ int main(void)
   MX_TIM2_Init();
   MX_I2C1_Init();
   MX_SDIO_SD_Init();
-  MX_TIM9_Init();
-  MX_TIM12_Init();
   MX_USART1_UART_Init();
-  MX_FATFS_Init();
   MX_TIM1_Init();
   MX_TIM3_Init();
-  MX_TIM13_Init();
+  MX_TIM4_Init();
+  MX_TIM8_Init();
+  MX_ADC1_Init();
   /* USER CODE BEGIN 2 */
-
+	EncoderInit();
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-		printf("Pulse     Speed");
-		for(int i=100; i<=10000; i+=100)
-		{
-				__HAL_TIM_SET_COMPARE(&htim2,TIM_CHANNEL_1,i);
-			
-				HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_RESET);
-				HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
-				HAL_GPIO_WritePin(GPIOC, GPIO_PIN_4, GPIO_PIN_RESET);
-				HAL_GPIO_WritePin(GPIOC, GPIO_PIN_5, GPIO_PIN_SET);
-				HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_RESET);
-				HAL_GPIO_WritePin(GPIOB, GPIO_PIN_1, GPIO_PIN_SET);
-				HAL_GPIO_WritePin(GPIOB, GPIO_PIN_2, GPIO_PIN_RESET);
-				HAL_GPIO_WritePin(GPIOF, GPIO_PIN_11, GPIO_PIN_SET);
-				HAL_Delay(3000);
-				if(i < 1000)
-				{
-					printf("1:%d       %f", i, (float)((float)EncoderCounter1 * 0.010466));
-					printf("2:%d       %f", i, (float)((float)EncoderCounter2 * 0.010466));
-					printf("3:%d       %f", i, (float)((float)EncoderCounter3 * 0.010466));
-					printf("4:%d       %f\n", i, (float)((float)EncoderCounter4 * 0.010466));
-				}
-				else if(i < 10000)
-				{
-					printf("1:%d      %f", i, (float)((float)EncoderCounter1 * 0.010466));
-					printf("2:%d      %f", i, (float)((float)EncoderCounter2 * 0.010466));
-					printf("3:%d      %f", i, (float)((float)EncoderCounter3 * 0.010466));
-					printf("4:%d      %f\n", i, (float)((float)EncoderCounter4 * 0.010466));
-				}
-				else
-				{
-					printf("1:%d     %f", i, (float)((float)EncoderCounter1 * 0.010466));
-					printf("2:%d     %f", i, (float)((float)EncoderCounter2 * 0.010466));
-					printf("3:%d     %f", i, (float)((float)EncoderCounter3 * 0.010466));
-					printf("4:%d     %f\n", i, (float)((float)EncoderCounter4 * 0.010466));
-
-				}
-				HAL_Delay(2000);
-		}
-		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_RESET);
-		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
-		HAL_GPIO_WritePin(GPIOC, GPIO_PIN_4, GPIO_PIN_RESET);
-		HAL_GPIO_WritePin(GPIOC, GPIO_PIN_5, GPIO_PIN_SET);
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_RESET);
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_1, GPIO_PIN_SET);
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_2, GPIO_PIN_RESET);
-		HAL_GPIO_WritePin(GPIOF, GPIO_PIN_11, GPIO_PIN_SET);
-		break;
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+		HAL_GPIO_TogglePin(GPIOG, GPIO_PIN_15);
+		HAL_Delay(1000);
+		
+		
   }
   /* USER CODE END 3 */
 }
@@ -185,12 +136,13 @@ void SystemClock_Config(void)
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
   /** Initializes the CPU, AHB and APB busses clocks 
   */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
-  RCC_OscInitStruct.HSEState = RCC_HSE_ON;
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
+  RCC_OscInitStruct.HSIState = RCC_HSI_ON;
+  RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
-  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
-  RCC_OscInitStruct.PLL.PLLM = 25;
-  RCC_OscInitStruct.PLL.PLLN = 336;
+  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;
+  RCC_OscInitStruct.PLL.PLLM = 8;
+  RCC_OscInitStruct.PLL.PLLN = 168;
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 7;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
@@ -213,45 +165,6 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
-
-/* Retargeting printf() output to Usart3 */
-#ifdef __GNUC__
-#define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
-#else
-#define PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)
-#endif 
-
-int fputc(int ch,FILE *f)
-{
-    uint8_t temp[1]={ch};
-    HAL_UART_Transmit(&huart1,temp,1,10);        //UartHandleÊÇ´®¿ÚµÄ¾ä±ú
-		return ch;
-}
-
-
-PUTCHAR_PROTOTYPE
-{
-	HAL_UART_Transmit(&huart1,(uint8_t*)&ch,1,10);
-	return ch;
-}
-
-
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
-{
-	
-	if(htim->Instance == TIM13)
-	{
-		EncoderCounter1 = htim1.Instance->CNT;
-		htim1.Instance->CNT  = 0;
-		EncoderCounter2 = htim3.Instance->CNT;
-		htim3.Instance->CNT  = 0;
-		EncoderCounter3 = htim9.Instance->CNT;
-		htim9.Instance->CNT  = 0;
-		EncoderCounter4 = htim12.Instance->CNT;
-		htim12.Instance->CNT = 0;
-		//__HAL_TIM_SET_COMPARE(&htim1,TIM_CHANNEL_1,0);
-	}
-}
 
 /* USER CODE END 4 */
 
