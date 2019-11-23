@@ -3,9 +3,7 @@
 void FullSpeedForward()
 {
 	//__HAL_TIM_SET_COMPARE(&htim2,TIM_CHANNEL_1,499);
-	//__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_2,499);
-	HAL_TIM_PWM_Start(&htim2,TIM_CHANNEL_1);
-	HAL_TIM_PWM_Start(&htim2,TIM_CHANNEL_2);
+	//__HAL_TIM_SET_COMPARE(&htim2,TIM_CHANNEL_2,499);
 	HAL_GPIO_WritePin(LeftIn1GPIO, LeftIn1Pin, GPIO_PIN_SET);
 	HAL_GPIO_WritePin(LeftIn2GPIO, LeftIn2Pin, GPIO_PIN_RESET);
 	HAL_GPIO_WritePin(RightIn1GPIO, RightIn1Pin, GPIO_PIN_SET);
@@ -15,9 +13,7 @@ void FullSpeedForward()
 void FullSpeedBack()
 {
 	//__HAL_TIM_SET_COMPARE(&htim2,TIM_CHANNEL_1,499);
-	//__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_2,499);
-	HAL_TIM_PWM_Start(&htim2,TIM_CHANNEL_1);
-	HAL_TIM_PWM_Start(&htim2,TIM_CHANNEL_2);
+	//__HAL_TIM_SET_COMPARE(&htim2,TIM_CHANNEL_2,499);
 	HAL_GPIO_WritePin(LeftIn1GPIO, LeftIn1Pin, GPIO_PIN_RESET);
 	HAL_GPIO_WritePin(LeftIn2GPIO, LeftIn2Pin, GPIO_PIN_SET);
 	HAL_GPIO_WritePin(RightIn1GPIO, RightIn1Pin, GPIO_PIN_RESET);
@@ -27,9 +23,7 @@ void FullSpeedBack()
 void TurnLeft()
 {
 	//__HAL_TIM_SET_COMPARE(&htim2,TIM_CHANNEL_1,499);
-	//__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_2,499);
-	HAL_TIM_PWM_Start(&htim2,TIM_CHANNEL_1);
-	HAL_TIM_PWM_Start(&htim2,TIM_CHANNEL_2);
+	//__HAL_TIM_SET_COMPARE(&htim2,TIM_CHANNEL_2,499);
 	HAL_GPIO_WritePin(LeftIn1GPIO, LeftIn1Pin, GPIO_PIN_RESET);
 	HAL_GPIO_WritePin(LeftIn2GPIO, LeftIn2Pin, GPIO_PIN_SET);
 	HAL_GPIO_WritePin(RightIn1GPIO, RightIn1Pin, GPIO_PIN_SET);
@@ -39,9 +33,7 @@ void TurnLeft()
 void TurnRight()
 {
 	//__HAL_TIM_SET_COMPARE(&htim2,TIM_CHANNEL_1,499);
-	//__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_2,499);
-	HAL_TIM_PWM_Start(&htim2,TIM_CHANNEL_1);
-	HAL_TIM_PWM_Start(&htim2,TIM_CHANNEL_2);
+	//__HAL_TIM_SET_COMPARE(&htim2,TIM_CHANNEL_2,499);
 	HAL_GPIO_WritePin(LeftIn1GPIO, LeftIn1Pin, GPIO_PIN_SET);
 	HAL_GPIO_WritePin(LeftIn2GPIO, LeftIn2Pin, GPIO_PIN_RESET);
 	HAL_GPIO_WritePin(RightIn1GPIO, RightIn1Pin, GPIO_PIN_RESET);
@@ -50,9 +42,7 @@ void TurnRight()
 void SuspendedTurnLeft()
 {
 	//__HAL_TIM_SET_COMPARE(&htim2,TIM_CHANNEL_1,499);
-	//__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_2,499);
-	HAL_TIM_PWM_Start(&htim2,TIM_CHANNEL_1);
-	HAL_TIM_PWM_Start(&htim2,TIM_CHANNEL_2);
+	//__HAL_TIM_SET_COMPARE(&htim2,TIM_CHANNEL_2,499);
 	HAL_GPIO_WritePin(LeftIn1GPIO, LeftIn1Pin, GPIO_PIN_SET);
 	HAL_GPIO_WritePin(LeftIn2GPIO, LeftIn2Pin, GPIO_PIN_SET);
 	HAL_GPIO_WritePin(RightIn1GPIO, RightIn1Pin, GPIO_PIN_SET);
@@ -62,9 +52,7 @@ void SuspendedTurnLeft()
 void SuspendedTurnRight()
 {
 	//__HAL_TIM_SET_COMPARE(&htim2,TIM_CHANNEL_1,499);
-	//__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_2,499);
-	HAL_TIM_PWM_Start(&htim2,TIM_CHANNEL_1);
-	HAL_TIM_PWM_Start(&htim2,TIM_CHANNEL_2);
+	//__HAL_TIM_SET_COMPARE(&htim2,TIM_CHANNEL_2,499);
 	HAL_GPIO_WritePin(LeftIn1GPIO, LeftIn1Pin, GPIO_PIN_SET);
 	HAL_GPIO_WritePin(LeftIn2GPIO, LeftIn2Pin, GPIO_PIN_RESET);
 	HAL_GPIO_WritePin(RightIn1GPIO, RightIn1Pin, GPIO_PIN_SET);
@@ -73,9 +61,7 @@ void SuspendedTurnRight()
 void BrakeTurnLeft()
 {
 	//__HAL_TIM_SET_COMPARE(&htim2,TIM_CHANNEL_1,499);
-	//__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_2,499);
-	HAL_TIM_PWM_Start(&htim2,TIM_CHANNEL_1);
-	HAL_TIM_PWM_Start(&htim2,TIM_CHANNEL_2);
+	//__HAL_TIM_SET_COMPARE(&htim2,TIM_CHANNEL_2,499);
 	HAL_GPIO_WritePin(LeftIn1GPIO, LeftIn1Pin, GPIO_PIN_RESET);
 	HAL_GPIO_WritePin(LeftIn2GPIO, LeftIn2Pin, GPIO_PIN_RESET);
 	HAL_GPIO_WritePin(RightIn1GPIO, RightIn1Pin, GPIO_PIN_SET);
@@ -84,9 +70,7 @@ void BrakeTurnLeft()
 void BrakeTurnRight()
 {
 	//__HAL_TIM_SET_COMPARE(&htim2,TIM_CHANNEL_1,499);
-	//__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_2,499);
-	HAL_TIM_PWM_Start(&htim2,TIM_CHANNEL_1);
-	HAL_TIM_PWM_Start(&htim2,TIM_CHANNEL_2);
+	//__HAL_TIM_SET_COMPARE(&htim2,TIM_CHANNEL_2,499);
 	HAL_GPIO_WritePin(LeftIn1GPIO, LeftIn1Pin, GPIO_PIN_SET);
 	HAL_GPIO_WritePin(LeftIn2GPIO, LeftIn2Pin, GPIO_PIN_RESET);
 	HAL_GPIO_WritePin(RightIn1GPIO, RightIn1Pin, GPIO_PIN_RESET);
@@ -96,7 +80,7 @@ void BrakeTurnRight()
 void Stop()
 {
 	//__HAL_TIM_SET_COMPARE(&htim2,TIM_CHANNEL_1,499);
-	//__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_2,499);
+	//__HAL_TIM_SET_COMPARE(&htim2,TIM_CHANNEL_2,499);
 	HAL_GPIO_WritePin(LeftIn1GPIO, LeftIn1Pin, GPIO_PIN_RESET);
 	HAL_GPIO_WritePin(LeftIn2GPIO, LeftIn2Pin, GPIO_PIN_RESET);
 	HAL_GPIO_WritePin(RightIn1GPIO, RightIn1Pin, GPIO_PIN_RESET);
