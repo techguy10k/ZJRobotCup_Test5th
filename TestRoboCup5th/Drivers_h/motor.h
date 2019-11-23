@@ -21,5 +21,6 @@ void SuspendedTurnLeft();
 void SuspendedTurnRight();
 void BrakeTurnLeft();
 void BrakeTurnRight();
+void Stop();
 
 #endif
