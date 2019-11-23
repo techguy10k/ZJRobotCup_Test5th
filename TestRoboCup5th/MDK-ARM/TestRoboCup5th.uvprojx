@@ -339,7 +339,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F407xx</Define>
               <Undefine></Undefine>
-              <IncludePath>../Inc; ../Drivers/STM32F4xx_HAL_Driver/Inc; ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy; ../Drivers/CMSIS/Device/ST/STM32F4xx/Include; ../Drivers/CMSIS/Include; ..\Drivers_c; ..\Drivers_h</IncludePath>
+              <IncludePath>../Inc;  ../Drivers/STM32F4xx_HAL_Driver/Inc;  ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;  ../Drivers/CMSIS/Device/ST/STM32F4xx/Include;  ../Drivers/CMSIS/Include;  ..\Drivers_c;  ..\Drivers_h</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -578,11 +578,21 @@
               <FileType>1</FileType>
               <FilePath>..\Drivers_c\EncoderInit.c</FilePath>
             </File>
+            <File>
+              <FileName>motor.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Drivers_c\motor.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
           <GroupName>Drivers_h</GroupName>
           <Files>
+            <File>
+              <FileName>motor.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Drivers_h\motor.h</FilePath>
+            </File>
             <File>
               <FileName>EncoderInit.h</FileName>
               <FileType>5</FileType>
