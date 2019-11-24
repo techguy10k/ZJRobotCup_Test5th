@@ -59,8 +59,8 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define Left_PWM_Pin GPIO_PIN_15
-#define Left_PWM_GPIO_Port GPIOA
+#define LEFT_PWM_Pin GPIO_PIN_15
+#define LEFT_PWM_GPIO_Port GPIOA
 #define RIGHT_IN1_Pin GPIO_PIN_9
 #define RIGHT_IN1_GPIO_Port GPIOG
 #define RIGHT_IN2_Pin GPIO_PIN_10
@@ -69,8 +69,8 @@ void Error_Handler(void);
 #define LEFT_IN1_GPIO_Port GPIOG
 #define LEFT_IN2_Pin GPIO_PIN_12
 #define LEFT_IN2_GPIO_Port GPIOG
-#define Right_PWM_Pin GPIO_PIN_3
-#define Right_PWM_GPIO_Port GPIOB
+#define RIGHT_PWM_Pin GPIO_PIN_3
+#define RIGHT_PWM_GPIO_Port GPIOB
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */
