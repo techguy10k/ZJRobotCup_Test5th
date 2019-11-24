@@ -53,13 +53,8 @@ void MX_GPIO_Init(void)
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOG, RIGHT_IN1_Pin|RIGHT_IN2_Pin|LEFT_IN1_Pin|LEFT_IN2_Pin, GPIO_PIN_SET);
 
-  /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_RESET);
-
-  /*Configure GPIO pins : PGPin PGPin PGPin PGPin 
-                           PGPin */
-  GPIO_InitStruct.Pin = RIGHT_IN1_Pin|RIGHT_IN2_Pin|LEFT_IN1_Pin|LEFT_IN2_Pin 
-                          |LED_Pin;
+  /*Configure GPIO pins : PGPin PGPin PGPin PGPin */
+  GPIO_InitStruct.Pin = RIGHT_IN1_Pin|RIGHT_IN2_Pin|LEFT_IN1_Pin|LEFT_IN2_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;

@@ -104,7 +104,13 @@ int main(void)
   MX_TIM8_Init();
   MX_ADC1_Init();
   /* USER CODE BEGIN 2 */
-	EncoderInit();
+	//EncoderInit();
+	HAL_TIM_PWM_Init(&htim2);
+	HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
+	HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_2);	
+	FullSpeedForward();
+	//HAL_Delay(5000);
+	//Stop();
   /* USER CODE END 2 */
 
   /* Infinite loop */
