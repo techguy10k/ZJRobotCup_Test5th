@@ -27,9 +27,9 @@ void EncoderInit(void)
 	HAL_TIM_Encoder_Start_IT(&htim4,TIM_CHANNEL_1);
 	HAL_TIM_Encoder_Start_IT(&htim4,TIM_CHANNEL_2);
 	
-	HAL_TIM_Encoder_Init(&htim8,&EncoderInit);
-	HAL_TIM_Encoder_Start_IT(&htim8,TIM_CHANNEL_1);
-	HAL_TIM_Encoder_Start_IT(&htim8,TIM_CHANNEL_2);
+	HAL_TIM_Encoder_Init(&htim9,&EncoderInit);
+	HAL_TIM_Encoder_Start_IT(&htim9,TIM_CHANNEL_1);
+	HAL_TIM_Encoder_Start_IT(&htim9,TIM_CHANNEL_2);
 	
 	
 	HAL_TIM_PWM_Init(&htim2);
